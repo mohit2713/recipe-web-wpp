@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import Header from "./header";
 
 function Recipe() {
   let params = useParams();
+  console.log(params.name);
   const [details, setdetails] = useState({});
   const [activetab, setactivetab] = useState("Instructions");
   const fetchDetails = async () => {
@@ -11,6 +13,7 @@ function Recipe() {
       `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
     );
     const detailData = await data.json();
+    console.log(detailData);
     setdetails(detailData);
   };
   useEffect(() => {
@@ -19,9 +22,12 @@ function Recipe() {
   return (
     <DetailWrapper>
       <div>
+        <Header />
+      </div>
+      <div>
         <h2>{details.title}</h2>
         <span></span>
-        <img src={details.image} alt="" />
+        <img id="logo" src={details.image} alt="" />
       </div>
       <Info>
         <Button
@@ -55,10 +61,11 @@ function Recipe() {
 }
 
 const DetailWrapper = styled.div`
-  margin-top: 7rem;
+  // margin-top: 7rem;
   margin-bottom: 5rem;
   position: relative;
   display: flex;
+  flex-direction: column;
   @media (max-width: 1393px) {
     display: flex;
     flex-direction: column;
@@ -79,8 +86,8 @@ const DetailWrapper = styled.div`
       justify-content: center;
     }
   }
-  img {
-    border-radius: 20px;
+  #logo {
+    border-radius: 10px;
   }
   @media (max-width: 1393px) {
     img {
@@ -158,4 +165,5 @@ const Info = styled.div`
     color: #4f4f4f;
   }
 `;
+
 export default Recipe;

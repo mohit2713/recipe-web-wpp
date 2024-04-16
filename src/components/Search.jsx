@@ -61,7 +61,6 @@ const Formstyle = styled.form`
       position: absolute;
       top: 38%;
       left: 6%;
-
       color: white;
     }
   }

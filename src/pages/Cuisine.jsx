@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
+import Header from "./header";
 
 function Cuisine() {
   const [cuisine, setCuisine] = React.useState([]);
@@ -26,16 +27,23 @@ function Cuisine() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {cuisine.map((item) => {
-        return (
-          <Card key={item.image}>
-            <Link to={"/recipe/" + item.id}>
-              <img src={item.image} alt="" />
-              <h4>{item.title}</h4>
-            </Link>
-          </Card>
-        );
-      })}
+      <div>
+        <div>
+          <Header />
+        </div>
+        <div className="flex flex-wrap">
+          {cuisine.map((item) => {
+            return (
+              <Card key={item.image}>
+                <Link to={"/recipe/" + item.id}>
+                  <img src={item.image} alt="" />
+                  <h4>{item.title}</h4>
+                </Link>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
     </Flex>
   );
 }
